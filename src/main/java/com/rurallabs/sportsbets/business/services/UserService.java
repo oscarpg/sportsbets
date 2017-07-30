@@ -20,7 +20,7 @@ public interface UserService {
 	long countUsers();
 
 	@Transactional
-	User save(final String login, final String name, final String email, final String password)
+	User save(final String login, final String email, final String password)
 			throws DuplicatedLoginException, DuplicatedEmailException;
 	
 	@Transactional

@@ -1,1 +1,35 @@
-hello world
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head th:substituteby="layout/header :: head"></head>
+  
+  <body>
+  
+    <header th:substituteby="layout/header :: header"></header>
+    
+    <div class="container">
+    	
+    	<div th:substituteby="layout/messages :: messages"></div>
+    	
+        <form id="login" th:action="@{/login}" method="post" class="form-signin" role="form" th:fragment="loginForm">
+            <h3 class="form-signin-heading" th:text="#{login.title}">Authenticate</h3>
+            <input id="loginInput" type="text" name="username" required="required" class="form-control" th:placeholder="#{app.login}" autofocus="autofocus" />
+            
+            <input id="passwordInput" type="password" name="password" required="required" class="form-control" th:placeholder="#{app.password}" />
+            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.form.submit}">Sign in</button>
+        </form>
+        
+        <form id="register" th:action="@{/register}" th:object="${user}" method="post" role="form">
+        	<h3 class="form-signin-heading" th:text="#{register.form.title}">Register</h3>
+			<input id="login" th:field="*{login}" type="text" class="form-control" required="required" th:placeholder="#{app.login}" th:errorclass="fieldError"/>
+			<input id="email" type="text" th:field="*{email}" class="form-control" required="required" th:placeholder="#{app.email}" th:errorclass="fieldError"/>
+			<input id="password" type="password" th:field="*{password}" class="form-control" data-type="password" required="required" th:placeholder="#{app.password}" th:errorclass="fieldError"/>
+			<input id="repeatPassword" type="password" th:field="*{repeatPassword}" class="form-control" data-type="password" required="required" th:placeholder="#{register.form.repeat.password}" th:errorclass="fieldError"/>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{register.form.submit}">Sign up</button>
+        </form>
+    </div>
+    
+    <footer th:substituteby="layout/footer :: footer"></footer>
+  </body>
+  
+</html>

@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User save(final String login, final String name, final String email, final String password)
+	public User save(final String login, final String email, final String password)
 			throws DuplicatedLoginException, DuplicatedEmailException {
 
 		final boolean userExists = this.userRepository.exists(login);
@@ -73,7 +73,6 @@ public class UserServiceImpl implements UserService {
 		final User user = new User();
 		user.setLogin(login);
 		user.setPassword(encryptedPassword);
-		user.setName(name);
 		user.setEmail(email);
 		user.setGlobalAdmin(false);
 		user.setActive(true);

@@ -70,17 +70,19 @@ public class SportsbetsApplication {
 		@Override
 		protected void configure(final HttpSecurity http) throws Exception {
 			http.authorizeRequests()
+				.antMatchers("/").permitAll()
 				.antMatchers("/home").permitAll()
-				.antMatchers("/register").permitAll()
 				.antMatchers("/login").permitAll()
+				.antMatchers("/register").permitAll()
+				.antMatchers("/logout").permitAll()
 				.antMatchers("/css/*.css").permitAll()
 				.antMatchers("/js/*.js").permitAll()
-				.antMatchers("/images/*.js").permitAll()
+				.antMatchers("/images/*").permitAll()
 				.antMatchers("/*").fullyAuthenticated()
 					.and().formLogin().loginPage("/login").failureUrl("/login?error")
 					.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 					.and().exceptionHandling()
-					.accessDeniedPage("/login?error");
+					.accessDeniedPage("/403");
 		}
 
 	}

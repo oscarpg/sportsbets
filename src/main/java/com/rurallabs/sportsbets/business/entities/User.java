@@ -12,8 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "USER_DATA", uniqueConstraints=
-		@UniqueConstraint(columnNames={"EMAIL"}))
+@Table(name = "USER_DATA", uniqueConstraints = @UniqueConstraint(columnNames = { "EMAIL" }) )
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 6044745065577451347L;
@@ -21,9 +20,6 @@ public class User implements Serializable {
 	@Id
 	@Column(name = "LOGIN", length = 100)
 	private String login;
-
-	@Column(name = "NAME", nullable = false, length = 600)
-	private String name;
 
 	@Column(name = "EMAIL", nullable = false, length = 200)
 	private String email;
@@ -69,14 +65,6 @@ public class User implements Serializable {
 
 	public void setPassword(final String password) {
 		this.password = password;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(final String name) {
-		this.name = name;
 	}
 
 	public boolean isActive() {
