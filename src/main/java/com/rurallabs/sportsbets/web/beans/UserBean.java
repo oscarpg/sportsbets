@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.ScriptAssert;
 
 @ScriptAssert(lang = "javascript", script = "_this.repeatPassword.equals(_this.password)", message = "register.validation.different.passowrds")
-public class NewUserBean implements Serializable {
+public class UserBean implements Serializable {
 	
 	private static final long serialVersionUID = -3165403866554991433L;
 
@@ -24,7 +24,7 @@ public class NewUserBean implements Serializable {
 	@NotBlank
 	private String repeatPassword;
 	
-	public NewUserBean() {
+	public UserBean() {
 		super();
 	}
 

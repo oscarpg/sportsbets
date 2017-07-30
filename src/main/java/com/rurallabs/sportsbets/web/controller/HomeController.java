@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.rurallabs.sportsbets.business.exceptions.DuplicatedEmailException;
 import com.rurallabs.sportsbets.business.exceptions.DuplicatedLoginException;
 import com.rurallabs.sportsbets.business.services.UserService;
-import com.rurallabs.sportsbets.web.beans.NewUserBean;
+import com.rurallabs.sportsbets.web.beans.UserBean;
 
 @Controller
 public class HomeController {
@@ -38,7 +38,7 @@ public class HomeController {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth instanceof AnonymousAuthenticationToken) {
 			/* The user is not logged in */
-			final NewUserBean user = new NewUserBean();
+			final UserBean user = new UserBean();
 			model.addAttribute("user", user);
 			return "home";
 		}
@@ -48,7 +48,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String signup(final HttpServletRequest request, final ModelMap model, 
-			@Valid @ModelAttribute(value = "user") final NewUserBean user, final BindingResult result,
+			@Valid @ModelAttribute(value = "user") final UserBean user, final BindingResult result,
 			final RedirectAttributes redirectAttributes) {
 		
 		if (result.hasErrors()) {

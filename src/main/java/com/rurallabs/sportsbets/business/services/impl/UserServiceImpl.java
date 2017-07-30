@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.text.RandomStringGenerator;
 import org.jasypt.util.password.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,7 +83,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String resetPassword(final String login, final boolean sendEmail) {
 
-		final String newPassword = RandomStringUtils.randomAlphanumeric(10);
+		final RandomStringGenerator generator = new RandomStringGenerator.Builder().build();
+		final String newPassword = generator.generate(10);
+
 		final String hashedNewPassword = this.passwordEncryptor.encryptPassword(newPassword);
 
 		final User user = this.userRepository.findOne(login);
