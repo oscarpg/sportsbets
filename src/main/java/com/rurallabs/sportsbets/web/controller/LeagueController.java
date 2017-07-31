@@ -33,9 +33,15 @@ public class LeagueController {
 		
 		model.addAttribute("teams", teams);
 		model.addAttribute("competitions", competitions);
-		
+		//TODO
 		return "create";
 		
 	}
-
+	
+	@RequestMapping(value = "join", method = RequestMethod.GET)
+	public String joinLeague(final HttpServletRequest request, final ModelMap model) {
+		//TODO
+		return "join";
+		
+	}
 }

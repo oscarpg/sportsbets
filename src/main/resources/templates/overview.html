@@ -1,1 +1,41 @@
-Wellcome
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head th:substituteby="layout/header :: head"></head>
+  
+  <body>
+    
+    <header th:substituteby="layout/header :: header"></header>
+    
+    <div class="container">
+    
+        <div class="row">
+            <h2 th:text="#{overview.title}">Welcome</h2>
+        </div>
+        
+        <div th:substituteby="layout/messages :: messages"></div>
+        
+        <div class="row">
+          <form class="navbar-form" role="form" th:if="${not #lists.isEmpty(leagues)}" th:action="@{/selectLeague}" method="get" th:object="${leagueSelector}">
+            <div class="form-group">
+                <select class="form-control" th:field="*{leagueId}">
+                  <option th:each="l : ${leagues}" th:value="${l.id}" th:text="${l.getName()}">a league</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" th:text="#{overview.select.league.form.submit}">View</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="row">
+        	<a th:href="@{/league/create}" th:text="#{app.create.league}" class="btn btn-lg btn-primary btn-block">Create league</a>
+          	<a th:href="@{/league/join}" th:text="#{app.join.league}" class="btn btn-lg btn-primary btn-block">Join a league</a>
+        </div>        
+        
+        
+    </div> 
+    
+  </body>
+  
+</html>
