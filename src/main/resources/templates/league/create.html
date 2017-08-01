@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head th:substituteby="layout/header :: head"></head>
+  
+  <script type="text/javascript">
+  		$(function() {
+  			$("#publicLeagueCheckbox").attr("checked", true);
+  			$("#publicBetsCheckbox").attr("checked", true);
+  			$("#passwordGroup").hide();
+  			$("#repeatResultsGroup").show();
+  		});
+		function publicLeagueSwitched() {
+		    if($('#publicLeagueCheckbox').is(":checked")) {
+		        $("#passwordGroup").hide();
+		    } else {
+		        $("#passwordGroup").show();
+			}
+		}
+		
+		function publicBetsSwitched() {
+		    if($('#publicBetsCheckbox').is(":checked")) {   
+		        $("#repeatResultsGroup").hide();
+			} else {
+		        $("#repeatResultsGroup").show();
+		    }
+		}
+	</script>
+  
+  <body>
+    
+    <header th:substituteby="layout/header :: header"></header>
+    
+    <div class="container">
+    
+        <h2 th:text="#{league.create.title}">Welcome</h2>
+        
+        <div th:substituteby="layout/messages :: messages"></div>
+        
+        <form th:action="@{save}" th:object="${leagueBean}" method="post" id="createLeagueForm">
+            <label for="name" th:text="#{league.create.name}">Name</label>
+            <input id="name" type="text" th:field="*{name}" required="required" />
+            <br />
+            <label for="public" th:text="#{league.create.public}">Is public</label>
+            <input id="publicLeagueCheckbox" type="checkbox" value="1" checked="checked" onclick="publicLeagueSwitched()" />
+           	<br />
+           	<div id="passwordGroup">
+              <label for="password" th:text="#{league.create.password}">Password</label>
+              <input id="password" type="text" th:field="*{password}" />
+            </div>
+            <br />
+            <label for="publicBets" th:text="#{league.create.public.bets}" >Public bets</label>
+            <input id="publicBetsCheckbox" type="checkbox" value="true" th:field="*{publicBets}" checked="checked" th:checked="checked" onclick="publicBetsSwitched()" />
+            <br />
+            <div class="form-group" id="repeatResultsGroup">
+              <label for="duplicatedResults" th:text="#{league.create.max.duplicated.results}" >Max duplicated results</label>
+              <input id="duplicatedResults" type="number" th:field="*{duplicatedResults}" value="${0}" min="0" step="1" />
+            </div>
+            <br />
+            <button class="btn btn-lg btn-primary" type="submit" th:text="#{league.create.form.submit}">Crear</button>
+            
+        </form>
+	</div>

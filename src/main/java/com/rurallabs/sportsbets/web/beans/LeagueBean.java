@@ -1,7 +1,7 @@
 package com.rurallabs.sportsbets.web.beans;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
@@ -25,9 +25,9 @@ public class LeagueBean implements Serializable {
 
 	private Integer duplicatedResults;
 
-	private List<Competition> competitions;
+	private Set<Competition> competitions;
 
-	private List<Team> teams;
+	private Set<Team> teams;
 
 	private Match match;
 
@@ -67,19 +67,19 @@ public class LeagueBean implements Serializable {
 		this.duplicatedResults = duplicatedResults;
 	}
 
-	public List<Competition> getCompetitions() {
+	public Set<Competition> getCompetitions() {
 		return this.competitions;
 	}
 
-	public void setCompetitions(final List<Competition> competitions) {
+	public void setCompetitions(final Set<Competition> competitions) {
 		this.competitions = competitions;
 	}
 
-	public List<Team> getTeams() {
+	public Set<Team> getTeams() {
 		return this.teams;
 	}
 
-	public void setTeams(final List<Team> teams) {
+	public void setTeams(final Set<Team> teams) {
 		this.teams = teams;
 	}
 

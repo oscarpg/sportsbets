@@ -30,12 +30,15 @@ public class League implements Serializable {
 	@Column(name = "PASSWORD", length = 50)
 	private String password;
 
+	@Column(name = "CODE", length = 10, nullable = false)
+	private String code;
+
 	@Column(name = "ACTIVE", nullable = false)
 	private boolean active = true;
 
 	@OneToMany(mappedBy = "league")
 	private Set<LeagueUser> participants = new LinkedHashSet<>();
-	
+
 	@OneToOne(optional = false)
 	@JoinColumn(name = "BET_CONFIG_ID", unique = true, nullable = false, updatable = false)
 	private BetConfig betConfig;
@@ -62,6 +65,14 @@ public class League implements Serializable {
 
 	public void setPassword(final String password) {
 		this.password = password;
+	}
+
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(final String code) {
+		this.code = code;
 	}
 
 	public boolean isActive() {

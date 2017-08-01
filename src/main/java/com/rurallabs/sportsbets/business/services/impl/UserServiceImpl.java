@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 	public long countUsers() {
 		return this.userRepository.count();
 	}
-
+	
 	@Override
 	public User save(final String login, final String email, final String password)
 			throws DuplicatedLoginException, DuplicatedEmailException {
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String resetPassword(final String login, final boolean sendEmail) {
 
-		final RandomStringGenerator generator = new RandomStringGenerator.Builder().build();
+		final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
 		final String newPassword = generator.generate(10);
 
 		final String hashedNewPassword = this.passwordEncryptor.encryptPassword(newPassword);
