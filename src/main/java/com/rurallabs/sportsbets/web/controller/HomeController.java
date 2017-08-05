@@ -32,7 +32,7 @@ public class HomeController {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	@RequestMapping({ "/", "/home" })
+	@RequestMapping({ "/", "/home", "login"})
 	public String homeRequest(final HttpServletRequest request, final ModelMap model) {
 		
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();

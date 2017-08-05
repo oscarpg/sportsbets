@@ -84,7 +84,7 @@ public class SportsbetsApplication {
 				.antMatchers("/css/*.css").permitAll()
 				.antMatchers("/js/*.js").permitAll()
 				.antMatchers("/images/*").permitAll()
-				.antMatchers("/*").fullyAuthenticated()
+				.antMatchers("/**").fullyAuthenticated()
 				.antMatchers("/admin/*").hasAnyAuthority("ADMIN")
 					.and().formLogin().loginPage("/login").failureUrl("/login?error")
 					.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

@@ -2,6 +2,7 @@ package com.rurallabs.sportsbets.business.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -113,6 +114,16 @@ public class Match implements Serializable, Comparable<Match> {
 
 	public void setScoreB(final Integer scoreB) {
 		this.scoreB = scoreB;
+	}
+	
+	public String getName(final Locale locale) {
+		if (this.homeTeam == null || this.awayTeam == null) {
+			return "";
+		}
+		if (locale == null) {
+			return this.getHomeTeam().getName() + " - " + this.getAwayTeam().getName();
+		}
+		return this.getHomeTeam().getName(locale) + " - " + this.getAwayTeam().getName(locale);
 	}
 
 	@Override

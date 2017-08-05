@@ -63,6 +63,7 @@ public class LeagueController {
 		final League league = this.leagueService.save(login, leagueBean);
 		if (league == null) {
 			//Show an error
+			return VIEW_BASE + "create";
 		}
 		
 		return "redirect:/overview";
