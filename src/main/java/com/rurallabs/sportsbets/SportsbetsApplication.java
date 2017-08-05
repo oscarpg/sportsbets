@@ -82,6 +82,7 @@ public class SportsbetsApplication {
 				.antMatchers("/register").permitAll()
 				.antMatchers("/logout").permitAll()
 				.antMatchers("/css/*.css").permitAll()
+				.antMatchers("/home-theme/**").permitAll()
 				.antMatchers("/js/*.js").permitAll()
 				.antMatchers("/images/*").permitAll()
 				.antMatchers("/**").fullyAuthenticated()

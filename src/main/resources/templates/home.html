@@ -1,35 +1,165 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-  <head th:substituteby="layout/header :: head"></head>
+  <head>
   
-  <body>
+  	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Liga de porras deportivas">
+    <meta name="author" content="Óscar del Pozo">
+    
+    <title>Sports Bets</title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{home-theme/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link th:href="@{home-theme/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link th:href="@{home-theme/vendor/magnific-popup/magnific-popup.css}" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link th:href="@{home-theme/css/creative.css}" rel="stylesheet">
   
-    <header th:substituteby="layout/header :: header"></header>
+  </head>
+  	
+  
+  
+  <body id="page-top">
+
+	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-collapse-menu">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Sports Bets</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-collapse-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#overview">Overview</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#signup">Signup</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#login">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+	<header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">Your Free Sweepstake League to compete against your friends and people worldwide</h1>
+                <hr class="light">
+                <p>Create your own leagues or just enroll to some existing ones to bet for your teams and matches. Enjoy!</p>
+                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+                <a href="#overview" class="btn btn-primary btn-xl page-scroll">Overview</a>
+                <a href="#signup" class="btn btn-primary btn-xl page-scroll">Sign Up</a>
+                <a href="#login" class="btn btn-primary btn-xl page-scroll">Login</a>
+            </div>
+        </div>
+    </header>
     
-    <div class="container">
-    	
-    	<div th:substituteby="layout/messages :: messages"></div>
-    	
-        <form id="login" th:action="@{/login}" method="post" class="form-signin" role="form" th:fragment="loginForm">
-            <h3 class="form-signin-heading" th:text="#{login.title}">Authenticate</h3>
-            <input id="loginInput" type="text" name="username" required="required" class="form-control" th:placeholder="#{app.login}" autofocus="autofocus" />
-            
-            <input id="passwordInput" type="password" name="password" required="required" class="form-control" th:placeholder="#{app.password}" />
-            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.form.submit}">Sign in</button>
-        </form>
-        
-        <form id="register" th:action="@{/register}" th:object="${user}" method="post" role="form">
-        	<h3 class="form-signin-heading" th:text="#{register.form.title}">Register</h3>
-			<input id="login" th:field="*{login}" type="text" class="form-control" required="required" th:placeholder="#{app.login}" th:errorclass="fieldError"/>
-			<input id="email" type="text" th:field="*{email}" class="form-control" required="required" th:placeholder="#{app.email}" th:errorclass="fieldError"/>
-			<input id="password" type="password" th:field="*{password}" class="form-control" data-type="password" required="required" th:placeholder="#{app.password}" th:errorclass="fieldError"/>
-			<input id="repeatPassword" type="password" th:field="*{repeatPassword}" class="form-control" data-type="password" required="required" th:placeholder="#{register.form.repeat.password}" th:errorclass="fieldError"/>
-			<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{register.form.submit}">Sign up</button>
-        </form>
-    </div>
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">The definitive place to manage your bets with your friends.</h2>
+                    <hr />
+                    <p class="text-muted">Here you can create leagues with all the games in a competition or just the matches of your favourite teams.
+                    	Or just create a sweepstake for a single match, it's up to you!</p>
+                    <a href="#signup" class="btn btn-primary btn-xl page-scroll">Sign Up!</a>
+                </div>
+            </div>
+        </div>
+    </section>
     
-    <footer th:substituteby="layout/footer :: footer"></footer>
+    <section class="bg-primary" id="signup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Sign up for free!</h2>
+                    <hr class="light">
+                   	<form id="register" th:action="@{/register}" th:object="${user}" method="post" role="form">
+						<input id="login" th:field="*{login}" type="text" class="form-control" required="required" th:placeholder="#{app.login}" th:errorclass="fieldError"/>
+						<input id="email" type="text" th:field="*{email}" class="form-control" required="required" th:placeholder="#{app.email}" th:errorclass="fieldError"/>
+						<input id="password" type="password" th:field="*{password}" class="form-control" data-type="password" required="required" th:placeholder="#{app.password}" th:errorclass="fieldError"/>
+						<input id="repeatPassword" type="password" th:field="*{repeatPassword}" class="form-control" data-type="password" required="required" th:placeholder="#{register.form.repeat.password}" th:errorclass="fieldError"/>
+						<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{register.form.submit}">Sign up</button>
+			        </form>
+                    <hr class="light">
+                    Already a member? <a href="#login" class="page-scroll btn btn-default btn-xl sr-button">Sign in!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+    <section class="bg-dark" id="login">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                	<h2 class="section-heading">Login</h2>
+                    <hr class="light">
+				    <form id="login" th:action="@{/login}" method="post" role="form">
+				        <input id="loginInput" type="text" name="username" required="required" class="form-control" th:placeholder="#{app.login}" />
+				        <input id="passwordInput" type="password" name="password" required="required" class="form-control" th:placeholder="#{app.password}" />
+				    	<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.form.submit}">Sign in</button>
+				    </form>
+			    </div>
+		    </div>
+	    </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p>Follow us on <a href="https://twitter.com/sportsbets" class="btn btn-twitter btn-xl sr-button">Twitter</a> </p>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a href="mailto:feedback@sportsbets.com">feedback@sportsbets.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- jQuery -->
+    <script th:src="@{/home-theme/vendor/jquery/jquery.min.js}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script th:src="@{/home-theme/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script th:src="@{/home-theme/vendor/scrollreveal/scrollreveal.min.js}"></script>
+    <script th:src="@{/home-theme/vendor/magnific-popup/jquery.magnific-popup.min.js}"></script>
+
+    <!-- Theme JavaScript -->
+    <script th:src="@{/home-theme/js/creative.min.js}"></script>
   </body>
   
 </html>
