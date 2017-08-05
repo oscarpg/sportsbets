@@ -60,16 +60,18 @@
             </div>
             <br />
             
-            <button class="accordion">Competitions</button>
+            <button class="accordion" th:text="#{league.create.competitions}">Competitions</button>
             <div id="competitionsBlock">
+            	<span class="info" th:text="#{league.create.competitions.info}"></span>
             	<div class="competitionSelect" th:each="competition : ${competitions}">
 	            	<input type="radio" th:field="*{competitions}" th:value="${competition.id}" />
 	    			<label th:for="${competition.getName(#locale)}" th:text="${competition.getName(#locale)}">La Liga</label>
     			</div>
             </div>
             
-            <button class="accordion">Teams</button>
+            <button class="accordion" th:text="#{league.create.teams}">Teams</button>
             <div id="teamsBlock">
+            	<span class="info" th:text="#{league.create.teams.info}"></span>
 				<div class="ck-button" th:each="team : ${teams}">
             		<label>
 				      <input type="checkbox" th:field="*{teams}" th:value="${team.id}" onclick="onTeamChanged()" />
@@ -78,8 +80,9 @@
             	</div>
             </div>
             
-            <button class="accordion">Matches</button>
+            <button class="accordion" th:text="#{league.create.matches}">Matches</button>
             <div id="matchesBlock">
+            	<span class="info" th:text="#{league.create.matches.info}"></span>
 				<select th:field="*{match}" class="form-control">
 					<option th:value="${null}"></option>
 					<option th:fragment="matches" th:each="match : ${matches}" th:value="${match.id}" th:text="${match.getName(#locale)}" />

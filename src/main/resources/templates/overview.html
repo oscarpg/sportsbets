@@ -16,11 +16,11 @@
         <div th:substituteby="layout/messages :: messages"></div>
         
         <div class="row">
-        	<a th:href="@{/league/create}" th:text="#{app.create.league}" class="btn btn-lg btn-primary btn-block">Create league</a>
-          	<a th:href="@{/league/join}" th:text="#{app.join.league}" class="btn btn-lg btn-primary btn-block">Join a league</a>
+        	<a th:href="@{/league/create}" th:text="#{app.create.league}" class="btn btn-lg btn-primary">Create league</a>
+          	<a th:href="@{/league/searchLeagues}" th:text="#{app.join.league}" class="btn btn-lg btn-primary">Join a league</a>
         </div>        
         <div class="row" th:unless="${#lists.isEmpty(leagues)}">
-        	<h2>Your leagues</h2>
+        	<h2 th:text="#{overview.leagues}">Your leagues</h2>
         	<div th:each="league: ${leagues}">
 	        	<a th:href="@{league/{leagueId}(leagueId=${league.id})}" th:text="${league.name}">League name</a>
         	</div>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head th:substituteby="layout/header :: head"></head>
+  
+  <body>
+    
+    <header th:substituteby="layout/header :: header"></header>
+    
+    <div class="container">
+    
+        <h2 th:text="#{league.join.title}">Join to a league</h2>
+        
+        <div th:substituteby="layout/messages :: messages"></div>
+        
+        <form th:action="@{search}" method="get" id="searchLeagueForm">
+            <label for="name" th:text="#{league.search.name}">Name</label>
+            <input name="name" type="text" />
+            
+            <label for="code" th:text="#{league.search.code}">Code</label>
+            <input name="code" type="text" />
+            
+            <button class="btn btn-lg btn-primary" type="submit" th:text="#{league.search.form.submit}">Buscar</button>
+            
+        </form>
+		
+		<h2 th:text="#{league.join.league}">Leagues</h2>
+		<form th:action="@{join}" th:unless="${#lists.isEmpty(leagues)}" method="post" th:object="${joinLeagueBean}" >
+			<ul>
+				<li th:each="league: ${leagues}">
+					<span th:text="${league.name}">League name</span>
+					<span th:text="${league.id}">League id</span>
+					
+					<input type="hidden" name="id" th:value="${league.id}" />
+					
+					<input th:unless="${#strings.isEmpty(league.password)}" th:field="*{password}"
+						id="passwordInput" type="password" name="password" required="required" th:placeholder="#{app.password}" />
+					
+					<button class="btn" type="submit" th:text="#{league.join.form.submit}">Join</button>
+				</li>
+			</ul>
+		</form>
+	</div>
+	
+	<footer th:substituteby="layout/footer :: footer"></footer>
+</body>
+</html>

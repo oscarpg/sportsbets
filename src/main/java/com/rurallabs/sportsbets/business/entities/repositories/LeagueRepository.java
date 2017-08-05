@@ -14,6 +14,8 @@ public interface LeagueRepository extends PagingAndSortingRepository<League, Lon
 
 	public List<League> findByNameLikeIgnoreCaseAndActiveTrue(final String name);
 	
+	public League findByCodeIgnoreCaseAndActiveTrue(final String code);
+	
 	public List<League> findByParticipantsUserLogin(final String login);
 	
 	public boolean existsByCode(String code);

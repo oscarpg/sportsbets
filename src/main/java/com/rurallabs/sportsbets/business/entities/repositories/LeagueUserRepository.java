@@ -9,5 +9,5 @@ import com.rurallabs.sportsbets.business.entities.LeagueUser;
 public interface LeagueUserRepository extends PagingAndSortingRepository<LeagueUser, Long> {
 	
 	// No methods to add
-
+	
 }

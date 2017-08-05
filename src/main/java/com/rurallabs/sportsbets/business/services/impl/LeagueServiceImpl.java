@@ -41,8 +41,18 @@ public class LeagueServiceImpl implements LeagueService {
 	private UserRepository userRepository;
 	
 	@Override
+	public League findById(final Long leagueId) {
+		return this.leagueRepository.findOne(leagueId);
+	}
+	
+	@Override
 	public List<League> findByName(final String name) {
-		return this.leagueRepository.findByNameLikeIgnoreCaseAndActiveTrue(name);
+		return this.leagueRepository.findByNameLikeIgnoreCaseAndActiveTrue('%' + name + '%');
+	}
+	
+	@Override
+	public League findByCode(final String code) {
+		return this.leagueRepository.findByCodeIgnoreCaseAndActiveTrue(code);
 	}
 
 	@Override
@@ -62,7 +72,7 @@ public class LeagueServiceImpl implements LeagueService {
 		if (leagueBean.getMatch() == null && CollectionUtils.isEmpty(leagueBean.getCompetitions()) 
 				&& CollectionUtils.isEmpty(leagueBean.getTeams())) {
 			// Empty league.
-			//TODO
+			return null;
 		}
 		
 		if (StringUtils.isNotBlank(leagueBean.getPassword())) {
@@ -123,6 +133,67 @@ public class LeagueServiceImpl implements LeagueService {
 		// Add the user to the league
 		newLeague.getParticipants().add(participant);
 		return this.leagueRepository.save(newLeague);
+	}
+
+	@Override
+	public League join(final Long leagueId, final String login, final String leaguePassword) {
+		final User user = this.userService.find(login);
+		
+		final League league = this.leagueRepository.findOne(leagueId);
+		if (league == null) {
+			//TODO throw new LeagueNotFoundException(); 
+		}
+		
+		if (!league.isActive()) {
+			//TODO throw new InactiveLeagueException(); 
+		}
+		
+		if (StringUtils.isNotBlank(league.getPassword())) {
+			if (!this.passwordEncryptor.checkPassword(leaguePassword, league.getPassword())) {
+				//TODO throw new IncorrectPasswordException();
+			}
+		}
+		
+		if (CollectionUtils.isNotEmpty(user.getUserLeagues())) {
+			for (final LeagueUser leagueForUser: user.getUserLeagues()) {
+				if (leagueForUser.getLeague().equals(league)) {
+					// The user already belongs to this league
+					return league;
+				}
+			}
+		}
+		
+		LeagueUser leagueUser = new LeagueUser();
+		leagueUser.setLeague(league);
+		leagueUser.setUser(user);
+		leagueUser.setIsAdmin(Boolean.FALSE);
+		
+		leagueUser = this.leagueUserRepository.save(leagueUser);
+		
+		user.getUserLeagues().add(leagueUser);
+		this.userRepository.save(user);
+		
+		// Add the user to the league
+		league.getParticipants().add(leagueUser);
+		return this.leagueRepository.save(league);
+		
+	}
+
+	@Override
+	public LeagueUser findLeagueUser(final League league, final String login) {
+		if (league == null || !league.isActive()) {
+			return null;
+		}
+		
+		final User user = this.userService.find(login);
+		
+		for (final LeagueUser leagueUser: league.getParticipants()) {
+			if (leagueUser.getUser().equals(user)) {
+				return leagueUser;
+			}
+		}
+		
+		return null;
 	}
 
 }

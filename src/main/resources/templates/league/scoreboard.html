@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head th:substituteby="layout/header :: head"></head>
+  
+  <body>
+    
+    <header th:substituteby="layout/header :: header"></header>
+    
+    <div class="container">
+        
+        <h2 th:text="${league.name}">League name</h2>
+    
+        <div th:substituteby="layout/messages :: messages"></div>
+        
+        <div id="participantList">
+        	<h2 th:text="#{league.participants}">Participants</h2>
+        	<div th:each="participant : ${league.participants}" class="leagueParticipant">
+        		<p th:text="${participant.user.login}" >User login</p>
+        	</div>
+        </div>
+        
+	</div>
+	
+	<footer th:substituteby="layout/footer :: footer"></footer>
+</body>
+</html>

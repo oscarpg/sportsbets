@@ -30,7 +30,7 @@ public class MatchController {
 		}
 		matches.add(0, new Match());
 	    model.addAttribute("matches", matches);
-		return " league/create :: matches";
+		return "league/create :: matches";
 	}
 
 }
