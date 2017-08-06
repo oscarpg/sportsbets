@@ -32,18 +32,23 @@ public class HomeController {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	@RequestMapping({ "/", "/home", "login"})
+	@RequestMapping({ "/", "/home"})
 	public String homeRequest(final HttpServletRequest request, final ModelMap model) {
 		
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth instanceof AnonymousAuthenticationToken) {
 			/* The user is not logged in */
-			final UserBean user = new UserBean();
-			model.addAttribute("user", user);
 			return "home";
 		}
 		
 		return "redirect:/overview";
+	}
+	
+	@RequestMapping("/login")
+	public String loginRequest(final HttpServletRequest request, final ModelMap model) {
+		final UserBean user = new UserBean();
+		model.addAttribute("user", user);
+		return "login";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -52,7 +57,7 @@ public class HomeController {
 			final RedirectAttributes redirectAttributes) {
 		
 		if (result.hasErrors()) {
-	        return "home";
+	        return "login";
 	    }
 		
 		try {
@@ -60,11 +65,11 @@ public class HomeController {
 		} catch (final DuplicatedLoginException e) {
 			model.addAttribute("user", user);
 			redirectAttributes.addFlashAttribute("error", "register.form.duplicated.login");
-			return "home";
+			return "login";
 		} catch (final DuplicatedEmailException e) {
 			redirectAttributes.addFlashAttribute("error", "register.form.duplicated.login");
 			model.addAttribute("user", user);
-			return "home";
+			return "login";
 		}
 		
 		// Perform authentication

@@ -28,8 +28,6 @@
   
   </head>
   	
-  
-  
   <body id="page-top">
 
 	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
@@ -52,10 +50,10 @@
                         <a class="page-scroll" href="#overview">Overview</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#signup">Signup</a>
+                        <a class="page-scroll" th:href="@{/login}" href="/login">Signup</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#login">Login</a>
+                        <a class="page-scroll" th:href="@{/login}" href="/login">Login</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -74,9 +72,7 @@
                 <hr class="light">
                 <p>Create your own leagues or just enroll to some existing ones to bet for your teams and matches. Enjoy!</p>
                 <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
-                <a href="#overview" class="btn btn-primary btn-xl page-scroll">Overview</a>
-                <a href="#signup" class="btn btn-primary btn-xl page-scroll">Sign Up</a>
-                <a href="#login" class="btn btn-primary btn-xl page-scroll">Login</a>
+                <a href="#signup" th:href="@{/login}" class="btn btn-primary btn-xl page-scroll">Start playing</a>
             </div>
         </div>
     </header>
@@ -89,47 +85,109 @@
                     <hr />
                     <p class="text-muted">Here you can create leagues with all the games in a competition or just the matches of your favourite teams.
                     	Or just create a sweepstake for a single match, it's up to you!</p>
-                    <a href="#signup" class="btn btn-primary btn-xl page-scroll">Sign Up!</a>
+                    <a href="#signup" th:href="@{/login}" class="btn btn-primary btn-xl page-scroll">Sign Up!</a>
+                    <a href="#overview" class="btn btn-primary btn-xl page-scroll">Tell me more</a>
                 </div>
             </div>
         </div>
     </section>
     
-    <section class="bg-primary" id="signup">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Sign up for free!</h2>
-                    <hr class="light">
-                   	<form id="register" th:action="@{/register}" th:object="${user}" method="post" role="form">
-						<input id="login" th:field="*{login}" type="text" class="form-control" required="required" th:placeholder="#{app.login}" th:errorclass="fieldError"/>
-						<input id="email" type="text" th:field="*{email}" class="form-control" required="required" th:placeholder="#{app.email}" th:errorclass="fieldError"/>
-						<input id="password" type="password" th:field="*{password}" class="form-control" data-type="password" required="required" th:placeholder="#{app.password}" th:errorclass="fieldError"/>
-						<input id="repeatPassword" type="password" th:field="*{repeatPassword}" class="form-control" data-type="password" required="required" th:placeholder="#{register.form.repeat.password}" th:errorclass="fieldError"/>
-						<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{register.form.submit}">Sign up</button>
-			        </form>
-                    <hr class="light">
-                    Already a member? <a href="#login" class="page-scroll btn btn-default btn-xl sr-button">Sign in!</a>
+    <section class="no-padding" id="overview">
+        <div class="container-fluid">
+            <div class="row no-gutter popup-gallery">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img th:src="@{home-theme/img/portfolio/thumbnails/1.jpg}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-  
-    <section class="bg-dark" id="login">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                	<h2 class="section-heading">Login</h2>
-                    <hr class="light">
-				    <form id="login" th:action="@{/login}" method="post" role="form">
-				        <input id="loginInput" type="text" name="username" required="required" class="form-control" th:placeholder="#{app.login}" />
-				        <input id="passwordInput" type="password" name="password" required="required" class="form-control" th:placeholder="#{app.password}" />
-				    	<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.form.submit}">Sign in</button>
-				    </form>
-			    </div>
-		    </div>
-	    </div>
-    </section>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img th:src="@{home-theme/img/portfolio/thumbnails/2.jpg}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img th:src="@{home-theme/img/portfolio/thumbnails/3.jpg}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img th:src="@{home-theme/img/portfolio/thumbnails/4.jpg}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img th:src="@{home-theme/img/portfolio/thumbnails/5.jpg}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-box">
+                        <img th:src="@{home-theme/img/portfolio/thumbnails/6.jpg}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        	</div>
+       	</div> 
+	</section>
     
     <section id="contact">
         <div class="container">
