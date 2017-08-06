@@ -40,8 +40,8 @@ public class League implements Serializable {
 	private Set<LeagueUser> participants = new LinkedHashSet<>();
 
 	@OneToOne(optional = false)
-	@JoinColumn(name = "BET_CONFIG_ID", unique = true, nullable = false, updatable = false)
-	private BetConfig betConfig;
+	@JoinColumn(name = "LEAGUE_CONFIG_ID", unique = true, nullable = false, updatable = false)
+	private LeagueConfig leagueConfig;
 
 	public Long getId() {
 		return this.id;
@@ -91,12 +91,12 @@ public class League implements Serializable {
 		this.participants = participants;
 	}
 
-	public BetConfig getBetConfig() {
-		return this.betConfig;
+	public LeagueConfig getLeagueConfig() {
+		return this.leagueConfig;
 	}
 
-	public void setBetConfig(final BetConfig betConfig) {
-		this.betConfig = betConfig;
+	public void setLeagueConfig(final LeagueConfig leagueConfig) {
+		this.leagueConfig = leagueConfig;
 	}
 
 	@Override

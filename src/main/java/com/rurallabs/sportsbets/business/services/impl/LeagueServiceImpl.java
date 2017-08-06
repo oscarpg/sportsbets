@@ -10,11 +10,11 @@ import org.jasypt.util.password.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rurallabs.sportsbets.business.entities.BetConfig;
 import com.rurallabs.sportsbets.business.entities.League;
+import com.rurallabs.sportsbets.business.entities.LeagueConfig;
 import com.rurallabs.sportsbets.business.entities.LeagueUser;
 import com.rurallabs.sportsbets.business.entities.User;
-import com.rurallabs.sportsbets.business.entities.repositories.BetConfigRepository;
+import com.rurallabs.sportsbets.business.entities.repositories.LeagueConfigRepository;
 import com.rurallabs.sportsbets.business.entities.repositories.LeagueRepository;
 import com.rurallabs.sportsbets.business.entities.repositories.LeagueUserRepository;
 import com.rurallabs.sportsbets.business.entities.repositories.UserRepository;
@@ -31,7 +31,7 @@ public class LeagueServiceImpl implements LeagueService {
 	@Autowired
 	private LeagueRepository leagueRepository;
 	@Autowired
-	private BetConfigRepository betConfigRepository;
+	private LeagueConfigRepository betConfigRepository;
 	@Autowired
 	private LeagueUserRepository leagueUserRepository;
 	
@@ -97,25 +97,25 @@ public class LeagueServiceImpl implements LeagueService {
 			return null;
 		}
 		
-		final BetConfig newBetConfig = new BetConfig();
+		final LeagueConfig newLeagueConfig = new LeagueConfig();
 		if (leagueBean.getMatch() != null) {
-			newBetConfig.setMatch(leagueBean.getMatch());
+			newLeagueConfig.setMatch(leagueBean.getMatch());
 		} else {
-			newBetConfig.setCompetitions(leagueBean.getCompetitions());
-			newBetConfig.setTeams(leagueBean.getTeams());
+			newLeagueConfig.setCompetitions(leagueBean.getCompetitions());
+			newLeagueConfig.setTeams(leagueBean.getTeams());
 		}
-		newBetConfig.setPublicBets(leagueBean.getPublicBets());
+		newLeagueConfig.setPublicBets(leagueBean.getPublicBets());
 		if (leagueBean.getPublicBets().booleanValue()) {
 			// Bet are visible. Set the max number of duplicated bets
-			newBetConfig.setDuplicatedResults(leagueBean.getDuplicatedResults());
+			newLeagueConfig.setDuplicatedResults(leagueBean.getDuplicatedResults());
 		} else {
 			// Bets are hidden until matches start, do not limit duplicated bets
-			newBetConfig.setDuplicatedResults(Integer.valueOf(Integer.MAX_VALUE));
+			newLeagueConfig.setDuplicatedResults(Integer.valueOf(Integer.MAX_VALUE));
 		}
 		
 		// Create the new bet config
-		final BetConfig betConfig = this.betConfigRepository.save(newBetConfig);
-		newLeague.setBetConfig(betConfig);
+		final LeagueConfig leagueConfig = this.betConfigRepository.save(newLeagueConfig);
+		newLeague.setLeagueConfig(leagueConfig);
 		newLeague.setParticipants(new HashSet<>());
 		
 		final League league = this.leagueRepository.save(newLeague);

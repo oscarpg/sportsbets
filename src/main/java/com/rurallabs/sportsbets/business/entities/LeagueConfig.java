@@ -16,8 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "BET_CONFIG")
-public class BetConfig implements Serializable {
+@Table(name = "LEAGUE_CONFIG")
+public class LeagueConfig implements Serializable {
 
 	private static final long serialVersionUID = 6879513900888641245L;
 
@@ -25,7 +25,7 @@ public class BetConfig implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToOne(optional = false, mappedBy = "betConfig")
+	@OneToOne(optional = false, mappedBy = "leagueConfig")
 	private League league;
 	
 	@Column(name = "PUBLIC_BETS", nullable = false)
@@ -50,7 +50,7 @@ public class BetConfig implements Serializable {
     @JoinColumn(name="MATCH_ID", nullable=true)
 	private Match match;
 
-	public BetConfig() {
+	public LeagueConfig() {
 		super();
 	}
 
